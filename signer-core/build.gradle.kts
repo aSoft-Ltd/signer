@@ -8,34 +8,36 @@ plugins {
 kotlin {
     jvm { library() }
     js(IR) { library() }
+    val darwinTargets = listOf(
+        macosX64(),
+        iosArm32(),
+        iosX64(),
+        iosArm64(),
+        watchosArm64(),
+        watchosArm32(),
+        watchosX86(),
+        tvosArm64(),
+        tvosX64()
+    )
 
-//    val darwinTargets = listOf(
-//        macosX64(),
-//        ios(),
-//        watchos(),
-//        tvos()
-//    )
-//
-//    val linuxTargets = listOf(
-//        linuxX64(),
-//        linuxArm64(),
-//        linuxArm32Hfp()
-//    )
+    val linuxTargets = listOf(
+        linuxX64()
+    )
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(asoft("later-ktx", vers.asoft.later))
+                api(libs.later.ktx)
             }
         }
         val commonTest by getting {
             dependencies {
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(libs.expect.coroutines)
             }
         }
     }
 }
 
 aSoftOSSLibrary(
-    version = vers.asoft.signer,
+    version = vers.signer,
     description = "A platform agnostic color library using css"
 )
